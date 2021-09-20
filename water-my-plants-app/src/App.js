@@ -1,23 +1,38 @@
 import logo from './logo.svg';
 import './App.css';
+import Axios from 'axios';
+import React, {useState, useEffect} from 'react';
+import LoginSignup from 'login-signup';
+import {Route} from 'react-router-dom';
 
+//filler state
+const [plants, setPlants] = useState([]);
+const [plant, setPlant] = useState()
+const [user, setUser] =useState()
+
+//SET DATA
+useEffect(
+  Axios.get('dummydata.api')
+    .then(res=>{
+      console.log(res.data);
+      setData(res.data);
+    })
+  .catch(er=>{
+    console.error(er);			
+
+    }),[])
+
+//RETURN HTML
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+			<Route>
+				<LoginSignup/>
+			</Route>
+
+			<Route>
+				{/*<SomethingElse/>*/}
+			</Route>
     </div>
   );
 }
