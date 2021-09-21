@@ -1,9 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Axios from "axios";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
-import LoginSignup from "../src/login-signup.js";
+import LoginSignup from "./components/login-signup.js";
 import { Route, Switch } from "react-router-dom";
+import styled from 'styled-components'
 
 //filler state
 // const [plants, setPlants] = useState([]);
