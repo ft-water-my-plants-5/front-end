@@ -1,7 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, {useState} from 'react';
 import Styled from 'styled-components'
-import theme from '../theme';
 
 const LoginStyle= Styled.div`
 	display: flex;
@@ -23,18 +21,44 @@ const LoginStyle= Styled.div`
 		}
 	}
 `
+	
+const initiallogin={
+	userName:'',
+	password:'',
+  }	
+  
+  const initialsignup={
+	userName:'',
+	phoneNumber:'',
+	password:'',
+  }
 
  export default function LoginSignup(){
+	const [loginData, setLoginData] = useState(initiallogin);
+	const [signupData, setsignupData] = useState(initialsignup);
+
+  	const updatelogin =(inputName, inputValue)=>{
+		  //validate
+    setLoginData({...loginData, [inputName]:inputValue});
+  	}
+
+	const onChange = evt => {
+    	const {name, value, checked, type} = evt.target;
+        const valueToUse = type === 'checkbox' ? checked : value;
+        updatelogin(name, valueToUse);
+    }
+
 	return(
 		<LoginStyle>
 			<div className='login'>
 				<h3>login</h3>
-				<label>{'email or username '}
-					<input type='text' name='email'/>
+				<label>{'username '}
+					<input type='text' name='userName' value={loginData.userName} onChange={onChange}/>
 				</label>
 				<label>{'password '}
-					<input type='text' name='password'/>
+					<input type='password' name='password' value={loginData.password} onChange={onChange}/>
 				</label>
+
 				{/*todo: setup validation*/}
 				{/*todo: loginbtn routes to homepage*/}
 				<button>Log in</button>
@@ -42,14 +66,14 @@ const LoginStyle= Styled.div`
 
 			<div className='signup'>
 				<h3>signup</h3>
-				<label>{'email '}
-					<input type='text' name='email'/>
-				</label>
 				<label>{'username '}
-					<input type='text' name='userName'/>
+					<input type='text' name='userName' value={signupData.userName} onChange={(evt)=>console.log(evt.target.parentElement.parentElement.className)}/>
+				</label>
+				<label>{'phone number '}
+					<input type='text' name='phoneNumber' value={signupData.phoneNumber}/>
 				</label>
 				<label>{'password '}
-					<input type='text' name='password'/>
+					<input type='password' name='password' value={signupData.password}/>
 				</label>
 				<button>sign up</button>
 				{/*todo: setup validation*/}
@@ -64,7 +88,4 @@ dummyData
 userName
 phoneNumber
 password
-
-
-
 */
