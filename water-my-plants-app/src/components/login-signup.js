@@ -6,15 +6,24 @@ const LoginStyle= Styled.div`
 	flex-flow: row wrap;
 	justify-content: center;
 	align-items: center;
+
+	@media(max-width: 500px){
+		
+	}
 	div{
 		display: flex;
 		flex-direction column;
+		justify-content: space-around;
 		border: ${props=>props.theme.colors.greenSheen} solid 2px;
 		border-radius: 3px;
 		box-shadow: 1px 2px;
 		margin-top:10px;
 		margin-left:10px;
 		margin-right:10px;
+		height: 120px;
+		@media(max-width: 500px){
+			
+		}
 		button{
 			width:30%;
 			align-self:center;
