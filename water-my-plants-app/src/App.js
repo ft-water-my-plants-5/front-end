@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import LoginSignup from "./components/login-signup.js";
 import { Route, Switch } from "react-router-dom";
 import styled from 'styled-components'
+import Header from './components/Header'
 
 //filler state
 // const [plants, setPlants] = useState([]);
@@ -24,9 +25,14 @@ import styled from 'styled-components'
 // );
 
 //RETURN HTML
+
 function App() {
   return (
     <div className="App">
+      <Header />
+      
+
+
       <Switch>
         <Route path="/login">
           <LoginSignup />
@@ -35,6 +41,8 @@ function App() {
           <LoginSignup />
         </Route>
       </Switch>
+
+    
     </div>
   );
 }
