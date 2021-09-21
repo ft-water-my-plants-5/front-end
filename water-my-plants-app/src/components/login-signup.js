@@ -35,17 +35,22 @@ const initiallogin={
 
  export default function LoginSignup(){
 	const [loginData, setLoginData] = useState(initiallogin);
-	const [signupData, setsignupData] = useState(initialsignup);
+	const [signupData, setSignupData] = useState(initialsignup);
 
   	const updatelogin =(inputName, inputValue)=>{
 		  //validate
-    setLoginData({...loginData, [inputName]:inputValue});
+    	setLoginData({...loginData, [inputName]:inputValue});
   	}
+	  const updatesignup =(inputName, inputValue)=>{
+		//validate
+	  setSignupData({...signupData, [inputName]:inputValue});
+	}
 
 	const onChange = evt => {
-    	const {name, value, checked, type} = evt.target;
-        const valueToUse = type === 'checkbox' ? checked : value;
-        updatelogin(name, valueToUse);
+    	const {name, value} = evt.target;
+		evt.target.parentElement.parentElement.className === 'login' ?
+        updatelogin(name, value):
+		updatesignup(name,value);
     }
 
 	return(
@@ -67,13 +72,13 @@ const initiallogin={
 			<div className='signup'>
 				<h3>signup</h3>
 				<label>{'username '}
-					<input type='text' name='userName' value={signupData.userName} onChange={(evt)=>console.log(evt.target.parentElement.parentElement.className)}/>
+					<input type='text' name='userName' value={signupData.userName} onChange={onChange}/>
 				</label>
 				<label>{'phone number '}
-					<input type='text' name='phoneNumber' value={signupData.phoneNumber}/>
+					<input type='text' name='phoneNumber' value={signupData.phoneNumber} onChange={onChange}/>
 				</label>
 				<label>{'password '}
-					<input type='password' name='password' value={signupData.password}/>
+					<input type='password' name='password' value={signupData.password} onChange={onChange}/>
 				</label>
 				<button>sign up</button>
 				{/*todo: setup validation*/}
