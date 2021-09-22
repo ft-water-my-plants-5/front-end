@@ -1,4 +1,19 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const Button = styled.button`
+color: whitesmoke;
+background-color: ${(props) => props.theme.colors.amazon};
+font-size: 2rem;
+border-radius: 0.15em;
+margin:0 auto;
+text-align: center;
+`;
+
+const StyledDiv = styled.div`
+font-size: 2.5rem;
+color: ${(props) => props.theme.colors.amazon};
+`;
 
 const initialFormValues = {
         plant_id: 0,
@@ -31,7 +46,7 @@ export default function PlantForm(){
     }
 
     return(
-        <div>
+        <StyledDiv>
             <form onSubmit={handleSubmit}>
                 <label>Nickname:
                     <input
@@ -69,9 +84,9 @@ export default function PlantForm(){
                         onChange={handleChange}
                     />
                 </label> 
-                <button>Add Plant!</button>       
+                <Button> Add Your Plant </Button>       
             </form>
-        </div>
+        </StyledDiv>
     )
 
 }
