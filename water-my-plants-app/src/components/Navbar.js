@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+
 const StyledNavBar = styled.nav`
   margin: auto 3em;
   display: flex;
@@ -26,6 +27,11 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+
+const logout = () => {
+    localStorage.removeItem("token")
+}
+
 export default function NavBar(props) {
   console.log(props.isLoggedIn);
   return (
@@ -38,7 +44,7 @@ export default function NavBar(props) {
           <StyledNavLink activeClassName="active" to="/plant-form">
             Add A Plant
           </StyledNavLink>
-          <StyledNavLink activeClassName="active" to="/logout">
+          <StyledNavLink activeClassName="active" onClick={logout} to="/">
             Logout
           </StyledNavLink>
           </>
