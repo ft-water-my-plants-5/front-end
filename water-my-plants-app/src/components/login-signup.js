@@ -13,23 +13,34 @@ const LoginStyle = Styled.div`
 	}
 	div{
 		display: flex;
-		flex-direction column;
-		justify-content: space-around;
-		border: ${(props) => props.theme.colors.greenSheen} solid 2px;
-		border-radius: 3px;
-		box-shadow: 1px 2px;
-		margin-top:10px;
-		margin-left:10px;
-		margin-right:10px;
-		height: 120px;
-		@media(max-width: 500px){
-			
-		}
-		button{
-			width:30%;
-			align-self:center;
-		}
+        flex-direction column;
+        justify-content: space-around;
+        border: ${(props) => props.theme.colors.amazon} solid 2.5px;
+        border-radius: 3px;
+        box-shadow: 3px 3px 15px 1px;
+        margin-top:10px;
+        margin-left:10px;
+        margin-right:10px;
+        height: 120px;
+        h3{align-self: center;}
+        button{
+            width:30%;
+            align-self:center;
+            background-color:${(props) => props.theme.colors.greenSheen};
+        }
+		label{
+            display:flex; 
+            flex-flow:row no-wrap;
 	}
+	input{
+                margin-left:3px;
+                justify-content:flex-end;
+                background-color:${(props) => props.theme.colors.greenSheen};
+                color:white;
+                letter-spacing:1px;
+            }
+}
+
 `;
 
 const initiallogin = {
@@ -39,8 +50,8 @@ const initiallogin = {
 
 const initialsignup = {
   username: "",
-  phone_number: "",
   password: "",
+  phone_number: "",
 };
 
 export default function LoginSignup(props) {
@@ -79,10 +90,19 @@ export default function LoginSignup(props) {
   };
 
   const signUp = (evt) => {
-    axios.post(
-      "https://ft-water-my-plants-5.herokuapp.com/api/register",
-      signupData
-    );
+    evt.preventDefault();
+    axios
+      .post(
+        "https://ft-water-my-plants-5.herokuapp.com/api/register",
+        signupData
+      )
+      .then((res) => {
+        console.log(signupData);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(signupData);
+      });
   };
 
   return (
@@ -99,7 +119,7 @@ export default function LoginSignup(props) {
           />
         </label>
         <label>
-          {"password "}
+          {"password"}
           <input
             type="password"
             name="password"
@@ -125,15 +145,6 @@ export default function LoginSignup(props) {
           />
         </label>
         <label>
-          {"phone number "}
-          <input
-            type="text"
-            name="phone_number"
-            value={signupData.phonenumber}
-            onChange={onChange}
-          />
-        </label>
-        <label>
           {"password "}
           <input
             type="password"
@@ -142,7 +153,16 @@ export default function LoginSignup(props) {
             onChange={onChange}
           />
         </label>
-        <button>sign up</button>
+        <label>
+          {"phone number "}
+          <input
+            type="text"
+            name="phone_number"
+            value={signupData.phone_number}
+            onChange={onChange}
+          />
+        </label>
+        <button onClick={signUp}>sign up</button>
         {/*todo: setup validation*/}
         {/*todo: signupbtn routes to homepage?*/}
       </div>

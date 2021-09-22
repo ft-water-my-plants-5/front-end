@@ -35,8 +35,8 @@ function App() {
       <Header isLoggedIn={isLoggedIn} />
 
       <Switch>
-        <PrivateRoute exact path="/protected" component={PlantPage} />
-        <PrivateRoute exact path="/protected" component={PlantForm} />
+        <PrivateRoute exact path="/plant-page" component={PlantPage} />
+        <PrivateRoute exact path="/plant-form" component={PlantForm} />
         <Route path="/plant-page">
           <PlantPage />
         </Route>
