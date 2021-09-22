@@ -5,6 +5,7 @@ import LoginSignup from "./components/login-signup.js";
 import { Route, Switch } from "react-router-dom";
 import Header from './components/Header'
 import PlantForm from './components/PlantForm'
+import PlantPage from "./components/PlantPage";
 
 //filler state
 // const [plants, setPlants] = useState([]);
@@ -33,6 +34,9 @@ function App() {
       <Header />
 
       <Switch>
+        <Route path='/plant-page'>
+          <PlantPage />
+        </Route>
         <Route path='/plant-form'>
           <PlantForm />
         </Route>

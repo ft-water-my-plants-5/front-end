@@ -71,16 +71,16 @@ const initiallogin={
 		axios.post("https://ft-water-my-plants-5.herokuapp.com/api/login", loginData)
 		.then(res => {
 			localStorage.setItem("token", res.data.token)
-			history.push('/plant-form')
+			history.push('/plant-page')
 		})
 		.catch(err => {
 			console.log(err)
 		})
 	}
 
-	// const signUp = evt => {
-
-	// }
+	const signUp = evt => {
+		axios.post("https://ft-water-my-plants-5.herokuapp.com/api/register", signupData)
+	}
 
 	return(
 		<LoginStyle>

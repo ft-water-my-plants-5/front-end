@@ -31,7 +31,7 @@ const StyledNavLink = styled(NavLink)`
 export default function NavBar() {
   return (
     <StyledNavBar>
-      <StyledNavLink activeClassName="active" to="/plants">Home</StyledNavLink>
+      <StyledNavLink activeClassName="active" to="/plant-page">Home</StyledNavLink>
       <StyledNavLink activeClassName="active" to="/plant-form">Add A Plant</StyledNavLink>
       <StyledNavLink activeClassName="active" to="/logout">Logout</StyledNavLink>
     </StyledNavBar>
