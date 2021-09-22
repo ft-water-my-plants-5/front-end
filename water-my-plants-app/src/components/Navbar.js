@@ -34,14 +34,14 @@ export default function NavBar(props) {
         Home
       </StyledNavLink>
       {props.isLoggedIn && (
-        <div>
+          <>
           <StyledNavLink activeClassName="active" to="/plant-form">
             Add A Plant
           </StyledNavLink>
           <StyledNavLink activeClassName="active" to="/logout">
             Logout
           </StyledNavLink>
-        </div>
+          </>
       )}
     </StyledNavBar>
   );
