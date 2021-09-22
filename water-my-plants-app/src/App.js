@@ -1,9 +1,8 @@
 import "./App.css";
 //import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import LoginSignup from "./components/login-signup.js";
 import { Route, Switch } from "react-router-dom";
-import styled from 'styled-components'
 import Header from './components/Header'
 import PlantForm from './components/PlantForm'
 
@@ -32,8 +31,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-      
-
 
       <Switch>
         <Route path='/plant-form'>
