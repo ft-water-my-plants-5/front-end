@@ -7,7 +7,6 @@ import Header from "./components/Header";
 import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
-import Logout from "./components/Logout"
 
 //filler state
 // const [plants, setPlants] = useState([]);
@@ -44,7 +43,7 @@ function App() {
         <Route path="/plant-form">
           <PlantForm />
         </Route> */}
-        
+
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>
