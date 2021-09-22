@@ -1,7 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import schema, {loginSchema} from './schema';
+import * as Yup from 'yup';
 
 const LoginStyle = Styled.div`
 	display: flex;
@@ -42,7 +44,18 @@ const LoginStyle = Styled.div`
 }
 
 `;
+//validity
+const initialDisable = true;
+const initialsignupErrors = {
+	username:'',
+	phone_number:'',
+	password:'',
+}
 
+const initialloginErrors = {
+	username:'',
+	password:'',
+}
 const initiallogin = {
   username: "",
   password: "",
@@ -58,17 +71,44 @@ export default function LoginSignup(props) {
   const [loginData, setLoginData] = useState(initiallogin);
   const [signupData, setSignupData] = useState(initialsignup);
   const [signUpForm, setSignUpForm] = useState(false);
+  const [signupDisable, setsignupDisable] = useState(initialDisable);
+  const [loginDisable, setLoginDisable] = useState(initialDisable);
+  const [signupErrors, setSignupErrors] = useState(initialsignupErrors);
+  const [loginErrors, setLoginErrors] = useState(initialloginErrors);
+
+  const validateSignup = (name, value) => {
+	Yup.reach(schema, name)
+	.validate(value)
+	.then(()=> setSignupErrors({...signupErrors, [name]:''}))
+	.catch((er)=> setSignupErrors({...signupErrors, [name]:er.errors[0]}))
+	}
+
+	const validateLogin = (name, value) => {
+	Yup.reach(loginSchema, name)
+	.validate(value)
+	.then(()=> setLoginErrors({...loginErrors, [name]:''}))
+	.catch((er)=> setLoginErrors({...loginErrors, [name]:er.errors[0]}))
+	}
 
   const history = useHistory();
 
   const updatelogin = (inputName, inputValue) => {
-    //validate
+    validateLogin(inputName, inputValue)
     setLoginData({ ...loginData, [inputName]: inputValue });
   };
   const updatesignup = (inputName, inputValue) => {
-    //validate
+    validateSignup(inputName, inputValue)
     setSignupData({ ...signupData, [inputName]: inputValue });
   };
+
+  useEffect(()=>{
+    schema.isValid(signupData)
+    .then(valid=> setsignupDisable(!valid))
+  }, [signupData])
+  useEffect(()=>{
+    loginSchema.isValid(loginData)
+    .then(valid=> setLoginDisable(!valid))
+  }, [loginData])
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
@@ -133,7 +173,7 @@ export default function LoginSignup(props) {
 
             {/*todo: setup validation*/}
             {/*todo: loginbtn routes to homepage*/}
-            <button onClick={login}>Log in</button>
+            <button disabled={loginDisable} onClick={login}>Log in</button>
           </div>
 
           <button
@@ -175,7 +215,9 @@ export default function LoginSignup(props) {
               onChange={onChange}
             />
           </label>
-          <button onClick={signUp}>sign up</button>
+          <button 
+		  disabled={signupDisable}
+		  onClick={signUp}>sign up</button>
           {/*todo: setup validation*/}
           {/*todo: signupbtn routes to homepage?*/}
         </div>
