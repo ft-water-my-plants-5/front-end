@@ -21,7 +21,7 @@ export default function Header(props) {
   return (
     <StyledHeader>
       <StyledTitle>Water My Plants</StyledTitle>
-      <NavBar isLoggedIn={props.isLoggedIn} />
+      <NavBar isLoggedIn={props.isLoggedIn} setIsLoggedIn={props.setIsLoggedIn} />
     </StyledHeader>
   );
 }

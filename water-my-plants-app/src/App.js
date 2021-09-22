@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
-import Logout from "./components/Logout"
+
 
 //filler state
 // const [plants, setPlants] = useState([]);
@@ -33,7 +33,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="App">
-      <Header isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Switch>
         <PrivateRoute exact path="/plant-page" component={PlantPage} />
