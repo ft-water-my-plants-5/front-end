@@ -7,7 +7,6 @@ const StyledNavBar = styled.nav`
   display: flex;
   justify-content: space-evenly;
   width: 30%;
-  
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -23,17 +22,27 @@ const StyledNavLink = styled(NavLink)`
   white-space: nowrap;
 
   &.active {
-    background-color: ${(props) => props.theme.colors.cambridgeBlue}; 
+    background-color: ${(props) => props.theme.colors.cambridgeBlue};
   }
-`
+`;
 
-
-export default function NavBar() {
+export default function NavBar(props) {
+  console.log(props.isLoggedIn);
   return (
     <StyledNavBar>
-      <StyledNavLink activeClassName="active" to="/plant-page">Home</StyledNavLink>
-      <StyledNavLink activeClassName="active" to="/plant-form">Add A Plant</StyledNavLink>
-      <StyledNavLink activeClassName="active" to="/logout">Logout</StyledNavLink>
+      <StyledNavLink activeClassName="active" to="/plant-page">
+        Home
+      </StyledNavLink>
+      {props.isLoggedIn && (
+        <div>
+          <StyledNavLink activeClassName="active" to="/protected">
+            Add A Plant
+          </StyledNavLink>
+          <StyledNavLink activeClassName="active" to="/protected">
+            Logout
+          </StyledNavLink>
+        </div>
+      )}
     </StyledNavBar>
   );
 }

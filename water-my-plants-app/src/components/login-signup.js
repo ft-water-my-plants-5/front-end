@@ -40,6 +40,7 @@ const LoginStyle = Styled.div`
                 letter-spacing:1px;
             }
 }
+
 `;
 
 const initiallogin = {
@@ -53,7 +54,7 @@ const initialsignup = {
   phone_number: "",
 };
 
-export default function LoginSignup() {
+export default function LoginSignup(prop) {
   const [loginData, setLoginData] = useState(initiallogin);
   const [signupData, setSignupData] = useState(initialsignup);
 
@@ -80,6 +81,7 @@ export default function LoginSignup() {
       .post("https://ft-water-my-plants-5.herokuapp.com/api/login", loginData)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        props.setIsLoggedIn(true);
         history.push("/plant-page");
       })
       .catch((err) => {

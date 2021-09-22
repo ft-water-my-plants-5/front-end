@@ -1,11 +1,12 @@
 import "./App.css";
 //import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import LoginSignup from "./components/login-signup.js";
 import { Route, Switch } from "react-router-dom";
-import Header from './components/Header'
-import PlantForm from './components/PlantForm'
+import Header from "./components/Header";
+import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 //filler state
 // const [plants, setPlants] = useState([]);
@@ -28,27 +29,27 @@ import PlantPage from "./components/PlantPage";
 //RETURN HTML
 
 function App() {
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="App">
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
 
       <Switch>
-        <Route path='/plant-page'>
+        <PrivateRoute exact path="/protected" component={PlantPage} />
+        <PrivateRoute exact path="/protected" component={PlantForm} />
+        <Route path="/plant-page">
           <PlantPage />
         </Route>
-        <Route path='/plant-form'>
+        <Route path="/plant-form">
           <PlantForm />
         </Route>
         <Route path="/login">
-          <LoginSignup />
+          <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>
         <Route path="/">
-          <LoginSignup />
+          <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>
       </Switch>
-
-    
     </div>
   );
 }
