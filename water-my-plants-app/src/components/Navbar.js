@@ -42,7 +42,7 @@ export default function NavBar(props) {
             Logout
           </StyledNavLink>
           </>
-      )}
+      )} 
     </StyledNavBar>
   );
 }

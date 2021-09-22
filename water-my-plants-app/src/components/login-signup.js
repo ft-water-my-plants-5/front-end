@@ -57,6 +57,7 @@ const initialsignup = {
 export default function LoginSignup(props) {
   const [loginData, setLoginData] = useState(initiallogin);
   const [signupData, setSignupData] = useState(initialsignup);
+  const [signUpForm, setSignUpForm] = useState(false);
 
   const history = useHistory();
 
@@ -97,7 +98,7 @@ export default function LoginSignup(props) {
         signupData
       )
       .then((res) => {
-        console.log(signupData);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -107,65 +108,78 @@ export default function LoginSignup(props) {
 
   return (
     <LoginStyle>
-      <div className="login">
-        <h3>login</h3>
-        <label>
-          {"username "}
-          <input
-            type="text"
-            name="username"
-            value={loginData.username}
-            onChange={onChange}
-          />
-        </label>
-        <label>
-          {"password"}
-          <input
-            type="password"
-            name="password"
-            value={loginData.password}
-            onChange={onChange}
-          />
-        </label>
+      {!signUpForm && (
+        <>
+          <div className="login">
+            <h3>login</h3>
+            <label>
+              {"username "}
+              <input
+                type="text"
+                name="username"
+                value={loginData.username}
+                onChange={onChange}
+              />
+            </label>
+            <label>
+              {"password"}
+              <input
+                type="password"
+                name="password"
+                value={loginData.password}
+                onChange={onChange}
+              />
+            </label>
 
-        {/*todo: setup validation*/}
-        {/*todo: loginbtn routes to homepage*/}
-        <button onClick={login}>Log in</button>
-      </div>
+            {/*todo: setup validation*/}
+            {/*todo: loginbtn routes to homepage*/}
+            <button onClick={login}>Log in</button>
+          </div>
 
-      <div className="signup">
-        <h3>signup</h3>
-        <label>
-          {"username "}
-          <input
-            type="text"
-            name="username"
-            value={signupData.username}
-            onChange={onChange}
-          />
-        </label>
-        <label>
-          {"password "}
-          <input
-            type="password"
-            name="password"
-            value={signupData.password}
-            onChange={onChange}
-          />
-        </label>
-        <label>
-          {"phone number "}
-          <input
-            type="text"
-            name="phone_number"
-            value={signupData.phone_number}
-            onChange={onChange}
-          />
-        </label>
-        <button onClick={signUp}>sign up</button>
-        {/*todo: setup validation*/}
-        {/*todo: signupbtn routes to homepage?*/}
-      </div>
+          <button
+            onClick={() => {
+              setSignUpForm(true);
+            }}
+          >
+            Not registered? Sign up!
+          </button>
+        </>
+      )}
+      {signUpForm && (
+        <div className="signup">
+          <h3>signup</h3>
+          <label>
+            {"username "}
+            <input
+              type="text"
+              name="username"
+              value={signupData.username}
+              onChange={onChange}
+            />
+          </label>
+          <label>
+            {"password "}
+            <input
+              type="password"
+              name="password"
+              value={signupData.password}
+              onChange={onChange}
+            />
+          </label>
+          <label>
+            {"phone number "}
+            <input
+              type="text"
+              name="phone_number"
+              value={signupData.phone_number}
+              onChange={onChange}
+            />
+          </label>
+          <button onClick={signUp}>sign up</button>
+          {/*todo: setup validation*/}
+          {/*todo: signupbtn routes to homepage?*/}
+        </div>
+      )}
     </LoginStyle>
   );
 }
