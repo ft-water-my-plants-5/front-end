@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import NavBar from './Navbar'
+import NavBar from "./Navbar";
 
 const StyledHeader = styled.header`
   background-image: url("https://images.unsplash.com/photo-1485134532658-d720895a3b5e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1746&q=80");
@@ -17,12 +17,11 @@ const StyledTitle = styled.h1`
   margin: auto 0;
 `;
 
-
-export default function Header() {
+export default function Header(props) {
   return (
     <StyledHeader>
       <StyledTitle>Water My Plants</StyledTitle>
-      <NavBar />
+      <NavBar isLoggedIn={props.isLoggedIn} />
     </StyledHeader>
   );
 }

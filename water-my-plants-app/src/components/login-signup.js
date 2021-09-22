@@ -1,9 +1,9 @@
-import axios from 'axios';
-import React, {useState} from 'react';
-import Styled from 'styled-components';
-import { useHistory } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
+import Styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
-const LoginStyle= Styled.div`
+const LoginStyle = Styled.div`
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
@@ -15,7 +15,7 @@ const LoginStyle= Styled.div`
 		display: flex;
 		flex-direction column;
 		justify-content: space-around;
-		border: ${props=>props.theme.colors.greenSheen} solid 2px;
+		border: ${(props) => props.theme.colors.greenSheen} solid 2px;
 		border-radius: 3px;
 		box-shadow: 1px 2px;
 		margin-top:10px;
@@ -30,91 +30,124 @@ const LoginStyle= Styled.div`
 			align-self:center;
 		}
 	}
-`
-	
-const initiallogin={
-	'username':'',
-	'password':'',
-  }	
-  
-  const initialsignup={
-	username:'',
-	phone_number:'',
-	password:'',
-  }
+`;
 
- export default function LoginSignup(){
-	const [loginData, setLoginData] = useState(initiallogin);
-	const [signupData, setSignupData] = useState(initialsignup);
+const initiallogin = {
+  username: "",
+  password: "",
+};
 
-	const history = useHistory()
+const initialsignup = {
+  username: "",
+  phone_number: "",
+  password: "",
+};
 
-  	const updatelogin =(inputName, inputValue)=>{
-		  //validate
-    	setLoginData({...loginData, [inputName]:inputValue});
-		
-  	}
-	  const updatesignup =(inputName, inputValue)=>{
-		//validate
-	  setSignupData({...signupData, [inputName]:inputValue});
-	 
-	}
+export default function LoginSignup(props) {
+  const [loginData, setLoginData] = useState(initiallogin);
+  const [signupData, setSignupData] = useState(initialsignup);
 
-	const onChange = evt => {
-    	const {name, value} = evt.target;
-		evt.target.parentElement.parentElement.className === 'login' ?
-        updatelogin(name, value):
-		updatesignup(name,value);
-    }
+  const history = useHistory();
 
-	const login = evt => {
-		axios.post("https://ft-water-my-plants-5.herokuapp.com/api/login", loginData)
-		.then(res => {
-			localStorage.setItem("token", res.data.token)
-			history.push('/plant-page')
-		})
-		.catch(err => {
-			console.log(err)
-		})
-	}
+  const updatelogin = (inputName, inputValue) => {
+    //validate
+    setLoginData({ ...loginData, [inputName]: inputValue });
+  };
+  const updatesignup = (inputName, inputValue) => {
+    //validate
+    setSignupData({ ...signupData, [inputName]: inputValue });
+  };
 
-	const signUp = evt => {
-		axios.post("https://ft-water-my-plants-5.herokuapp.com/api/register", signupData)
-	}
+  const onChange = (evt) => {
+    const { name, value } = evt.target;
+    evt.target.parentElement.parentElement.className === "login"
+      ? updatelogin(name, value)
+      : updatesignup(name, value);
+  };
 
-	return(
-		<LoginStyle>
-			<div className='login'>
-				<h3>login</h3>
-				<label>{'username '}
-					<input type='text' name='username' value={loginData.username} onChange={onChange}/>
-				</label>
-				<label>{'password '}
-					<input type='password' name='password' value={loginData.password} onChange={onChange}/>
-				</label>
+  const login = (evt) => {
+    axios
+      .post("https://ft-water-my-plants-5.herokuapp.com/api/login", loginData)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        props.setIsLoggedIn(true);
+        history.push("/plant-page");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-				{/*todo: setup validation*/}
-				{/*todo: loginbtn routes to homepage*/}
-				<button onClick={login}>Log in</button>
-			</div>
+  const signUp = (evt) => {
+    axios.post(
+      "https://ft-water-my-plants-5.herokuapp.com/api/register",
+      signupData
+    );
+  };
 
-			<div className='signup'>
-				<h3>signup</h3>
-				<label>{'username '}
-					<input type='text' name='username' value={signupData.username} onChange={onChange}/>
-				</label>
-				<label>{'phone number '}
-					<input type='text' name='phone_number' value={signupData.phonenumber} onChange={onChange}/>
-				</label>
-				<label>{'password '}
-					<input type='password' name='password' value={signupData.password} onChange={onChange}/>
-				</label>
-				<button>sign up</button>
-				{/*todo: setup validation*/}
-				{/*todo: signupbtn routes to homepage?*/}
-			</div>
-		</LoginStyle>
-	)
+  return (
+    <LoginStyle>
+      <div className="login">
+        <h3>login</h3>
+        <label>
+          {"username "}
+          <input
+            type="text"
+            name="username"
+            value={loginData.username}
+            onChange={onChange}
+          />
+        </label>
+        <label>
+          {"password "}
+          <input
+            type="password"
+            name="password"
+            value={loginData.password}
+            onChange={onChange}
+          />
+        </label>
+
+        {/*todo: setup validation*/}
+        {/*todo: loginbtn routes to homepage*/}
+        <button onClick={login}>Log in</button>
+      </div>
+
+      <div className="signup">
+        <h3>signup</h3>
+        <label>
+          {"username "}
+          <input
+            type="text"
+            name="username"
+            value={signupData.username}
+            onChange={onChange}
+          />
+        </label>
+        <label>
+          {"phone number "}
+          <input
+            type="text"
+            name="phone_number"
+            value={signupData.phonenumber}
+            onChange={onChange}
+          />
+        </label>
+        <label>
+          {"password "}
+          <input
+            type="password"
+            name="password"
+            value={signupData.password}
+            onChange={onChange}
+          />
+        </label>
+        <button>sign up</button>
+        {/*todo: setup validation*/}
+        {/*todo: signupbtn routes to homepage?*/}
+      </div>
+    </LoginStyle>
+  );
 }
 
 /*user
