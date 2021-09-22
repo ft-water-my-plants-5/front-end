@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
+import Logout from "./components/Logout"
 
 //filler state
 // const [plants, setPlants] = useState([]);
@@ -37,12 +38,13 @@ function App() {
       <Switch>
         <PrivateRoute exact path="/plant-page" component={PlantPage} />
         <PrivateRoute exact path="/plant-form" component={PlantForm} />
-        <Route path="/plant-page">
+        {/* <Route path="/plant-page">
           <PlantPage />
         </Route>
         <Route path="/plant-form">
           <PlantForm />
-        </Route>
+        </Route> */}
+        
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>
