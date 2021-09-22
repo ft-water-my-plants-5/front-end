@@ -28,12 +28,15 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 
-const logout = () => {
-    localStorage.removeItem("token")
-}
+
 
 export default function NavBar(props) {
-  console.log(props.isLoggedIn);
+    
+    const logout = () => {
+        localStorage.removeItem("token")
+        props.setIsLoggedIn(false)
+    }
+
   return (
     <StyledNavBar>
       <StyledNavLink activeClassName="active" to="/plant-page">
