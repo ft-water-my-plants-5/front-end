@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, {useState} from 'react';
-import Styled from 'styled-components'
+import Styled from 'styled-components';
+import { useHistory } from 'react-router-dom'
 
 const LoginStyle= Styled.div`
 	display: flex;
@@ -46,15 +47,17 @@ const initiallogin={
 	const [loginData, setLoginData] = useState(initiallogin);
 	const [signupData, setSignupData] = useState(initialsignup);
 
+	const history = useHistory()
+
   	const updatelogin =(inputName, inputValue)=>{
 		  //validate
     	setLoginData({...loginData, [inputName]:inputValue});
-		console.log(loginData)
+		
   	}
 	  const updatesignup =(inputName, inputValue)=>{
 		//validate
 	  setSignupData({...signupData, [inputName]:inputValue});
-	  console.log(signupData)
+	 
 	}
 
 	const onChange = evt => {
@@ -65,10 +68,10 @@ const initiallogin={
     }
 
 	const login = evt => {
-		evt.preventDefault()
 		axios.post("https://ft-water-my-plants-5.herokuapp.com/api/login", loginData)
 		.then(res => {
-			console.log(res)
+			localStorage.setItem("token", res.data.token)
+			history.push('/plant-form')
 		})
 		.catch(err => {
 			console.log(err)
