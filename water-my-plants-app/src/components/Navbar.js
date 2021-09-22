@@ -35,10 +35,10 @@ export default function NavBar(props) {
       </StyledNavLink>
       {props.isLoggedIn && (
         <div>
-          <StyledNavLink activeClassName="active" to="/protected">
+          <StyledNavLink activeClassName="active" to="/plant-form">
             Add A Plant
           </StyledNavLink>
-          <StyledNavLink activeClassName="active" to="/protected">
+          <StyledNavLink activeClassName="active" to="/logout">
             Logout
           </StyledNavLink>
         </div>

@@ -54,7 +54,7 @@ const initialsignup = {
   phone_number: "",
 };
 
-export default function LoginSignup(prop) {
+export default function LoginSignup(props) {
   const [loginData, setLoginData] = useState(initiallogin);
   const [signupData, setSignupData] = useState(initialsignup);
 
