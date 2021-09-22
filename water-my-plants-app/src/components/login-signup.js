@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useState} from 'react';
 import Styled from 'styled-components'
 
@@ -31,13 +32,13 @@ const LoginStyle= Styled.div`
 `
 	
 const initiallogin={
-	userName:'',
-	password:'',
+	'username':'',
+	'password':'',
   }	
   
   const initialsignup={
-	userName:'',
-	phoneNumber:'',
+	username:'',
+	phone_number:'',
 	password:'',
   }
 
@@ -48,10 +49,12 @@ const initiallogin={
   	const updatelogin =(inputName, inputValue)=>{
 		  //validate
     	setLoginData({...loginData, [inputName]:inputValue});
+		console.log(loginData)
   	}
 	  const updatesignup =(inputName, inputValue)=>{
 		//validate
 	  setSignupData({...signupData, [inputName]:inputValue});
+	  console.log(signupData)
 	}
 
 	const onChange = evt => {
@@ -61,12 +64,27 @@ const initiallogin={
 		updatesignup(name,value);
     }
 
+	const login = evt => {
+		evt.preventDefault()
+		axios.post("https://ft-water-my-plants-5.herokuapp.com/api/login", loginData)
+		.then(res => {
+			console.log(res)
+		})
+		.catch(err => {
+			console.log(err)
+		})
+	}
+
+	// const signUp = evt => {
+
+	// }
+
 	return(
 		<LoginStyle>
 			<div className='login'>
 				<h3>login</h3>
 				<label>{'username '}
-					<input type='text' name='userName' value={loginData.userName} onChange={onChange}/>
+					<input type='text' name='username' value={loginData.username} onChange={onChange}/>
 				</label>
 				<label>{'password '}
 					<input type='password' name='password' value={loginData.password} onChange={onChange}/>
@@ -74,16 +92,16 @@ const initiallogin={
 
 				{/*todo: setup validation*/}
 				{/*todo: loginbtn routes to homepage*/}
-				<button>Log in</button>
+				<button onClick={login}>Log in</button>
 			</div>
 
 			<div className='signup'>
 				<h3>signup</h3>
 				<label>{'username '}
-					<input type='text' name='userName' value={signupData.userName} onChange={onChange}/>
+					<input type='text' name='username' value={signupData.username} onChange={onChange}/>
 				</label>
 				<label>{'phone number '}
-					<input type='text' name='phoneNumber' value={signupData.phoneNumber} onChange={onChange}/>
+					<input type='text' name='phone_number' value={signupData.phonenumber} onChange={onChange}/>
 				</label>
 				<label>{'password '}
 					<input type='password' name='password' value={signupData.password} onChange={onChange}/>
