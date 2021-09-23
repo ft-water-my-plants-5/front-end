@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import imageGenerator from "../utils/imageGenerator";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { Link } from 'react-router-dom'
+
 
 const StyledPlantContainer = styled.div`
   max-width: 60%;
