@@ -2,12 +2,12 @@ import aloe from "../images/aloe.jpeg";
 import anthurium from "../images/anthurium.jpeg";
 import bonsai from "../images/bonsai.jpeg";
 import brownPot from "../images/brown-pot.jpeg";
-import ficus from "../images/ficus/jpeg";
+import ficus from "../images/ficus.jpeg";
 import succulent from "../images/succulent.jpeg";
 import sunflower from "../images/sunflower.jpeg";
 
 const imageGenerator = () => {
-  switch (Math.ceiling(Math.random() * 7)) {
+  switch (Math.ceil(Math.random() * 7)) {
     case 1:
       return aloe;
     case 2:
@@ -26,5 +26,6 @@ const imageGenerator = () => {
       return aloe;
   }
 };
+
 
 export default imageGenerator;
