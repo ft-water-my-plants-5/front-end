@@ -216,8 +216,7 @@ export default function LoginSignup(props) {
           <button 
 		  disabled={signupDisable}
 		  onClick={signUp}>sign up</button>
-          {/*todo: setup validation*/}
-          {/*todo: signupbtn routes to homepage?*/}
+         <button onClick={() => setSignUpForm(false)}>Back to Login</button>
         </div>
       )}
     </LoginStyle>
