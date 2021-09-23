@@ -72,8 +72,9 @@ export default function PlantPage(props) {
         setChangedValue(
          e.target.value
         )
-        setObjectToSend({e.target.name: })
+        setObjectToSend({[e.target.name]: e.target.value })
         console.log(changedValue)
+        console.log(objectToSend)
     }
 
   return (
@@ -152,6 +153,8 @@ export default function PlantPage(props) {
                   onClick={() => {
                     setEditing(!isEditing);
                     setFieldToEdit("");
+                    setObjectToSend({})
+                    setChangedValue('')
                   }}
                 >
                   Edit Plant
