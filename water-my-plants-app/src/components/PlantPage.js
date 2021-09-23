@@ -28,16 +28,16 @@ h2{
 }
 `
 
-export default function PlantPage() {
-  const [plants, setPlants] = useState([]);
+export default function PlantPage(props) {
   const [userData, setUserData] = useState({});
-
+    console.log('THE PROPS', props)
+ 
   useEffect(() => {
     axiosWithAuth()
       .get("/user")
       .then((res) => {
         setUserData(res.data);
-        setPlants(res.data.plants);
+        props.setPlants(res.data.plants);
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +48,7 @@ export default function PlantPage() {
     <StyledPlantPage>
       <h2>{`${userData.username}'s Plants!`}</h2>
       <StyledPlantsContainer>
-      {plants.map((pl) => {
+      {props.plants.map((pl) => {
         return (
           <StyledPlantContainer>
             <p>{pl.nickname}</p>

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axiosWithAuth from '../utils/axiosWithAuth'
+import { useHistory } from 'react-router-dom';
 
 
 const Button = styled.button`
@@ -27,8 +29,6 @@ const StyledDiv = styled.div`
      align-items: left;
      width: fit-content ;
      margin: 2em auto;
-     border: 1px solid pink;
-     
  } 
 
  input, label{
@@ -47,8 +47,22 @@ const initialFormValues = {
   notes: "",
 };
 
-export default function PlantForm() {
+export default function PlantForm(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [userId, setUserId] = useState('')
+
+  const history = useHistory()
+
+  useEffect(() => {
+      axiosWithAuth()
+      .get('/user')
+      .then(res => {
+          setUserId(res.data.user_id)
+      })
+      .catch(err => {
+          console.err(err)
+      })
+  }, [])
 
   const handleChange = (e) => {
     setFormValues({
@@ -60,14 +74,26 @@ export default function PlantForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newPlant = {
-      plant_id: Date.now(),
       nickname: formValues.nickname,
       species: formValues.species,
-      days_between_watering: formValues.days_between_watering,
+      days_between_watering: parseInt(formValues.days_between_watering),
       notes: formValues.notes,
+      user_id: userId
     };
-    console.log(newPlant);
-  };
+ 
+
+    axiosWithAuth()
+    .post('/plants', newPlant)
+    .then(res => {
+        props.setPlants([...props.plants, newPlant])
+        history.push('/plant-page')
+    })
+    .catch(err => {
+        console.log(newPlant)
+        console.log(err)
+    })
+
+};
 
   return (
     <StyledDiv>
@@ -95,8 +121,8 @@ export default function PlantForm() {
         <label>
           Days Between Watering:
           <input
-            id="days"
-            name="days"
+            id="days_between_watering"
+            name="days_between_watering"
             type="number"
             value={formValues.days_between_watering}
             onChange={handleChange}
