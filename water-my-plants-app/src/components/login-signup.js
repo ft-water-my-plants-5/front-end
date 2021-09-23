@@ -143,7 +143,9 @@ export default function LoginSignup(props) {
         signupData
       )
       .then((res) => {
-        console.log(res);
+		localStorage.setItem("token", res.data.token)
+        props.setIsLoggedIn(true);
+        history.push("/plant-page");
       })
       .catch((err) => {
         console.log(err);
