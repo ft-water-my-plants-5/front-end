@@ -47,7 +47,7 @@ export default function NavBar(props) {
           <StyledNavLink activeClassName="active" to="/plant-form">
             Add A Plant
           </StyledNavLink>
-          <StyledNavLink activeClassName="active" onClick={logout} to="/">
+          <StyledNavLink activeClassName="active" onClick={logout} exact to="/">
             Logout
           </StyledNavLink>
           </>
