@@ -1,3 +1,23 @@
-.App{
+.App {
   height: 100%;
+}
+
+@media (max-width: 500px) {
+  .login {
+    width: 400px;
+    height: 400px;
+  }
+
+  .login h3 {
+    font-size: 50px;
+  }
+
+  .login label {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .login input {
+    display: block;
+  }
 }
