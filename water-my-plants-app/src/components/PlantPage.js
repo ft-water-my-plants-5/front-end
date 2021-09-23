@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import imageGenerator from "../utils/imageGenerator";
+// import imageGenerator from "../utils/imageGenerator";
 import styled from 'styled-components'
 
 
@@ -17,6 +17,8 @@ const StyledPlantContainer = styled.div`
 max-width: 60%;
 border: 1px solid whitesmoke;
 padding: 4em;
+display: flex;
+flex-direction: column;
 
  
  img{
@@ -40,6 +42,7 @@ h2{
  
 export default function PlantPage(props) {
   const [userData, setUserData] = useState({});
+  const [isEditing, setEditing] = useState(false)
     
   const { plants, setPlants } = props
  
@@ -74,13 +77,17 @@ export default function PlantPage(props) {
         return (
           <StyledPlantContainer>
             <h3>{pl.nickname}</h3>
+            {isEditing && <button>Edit Nickname</button>}
             <p>{pl.species}</p>
+            {isEditing && <button>Edit Species</button>}
             <p>Days Between Watering: {pl.days_between_watering}</p>
+            {isEditing && <button>Edit Days</button>}
             <p>{pl.notes}</p>
+            {isEditing && <button>Edit Notes</button>}
             {/* <div className="image-container"></div> */}
-            <img src={imageGenerator()} alt="plant"></img>
+            <img src={pl.img_url} alt="plant"></img>
             <div className='button-container'>
-                <button>Edit Plant</button>
+                <button onClick={()=> {setEditing(true)}}>Edit Plant</button>
                 <button className='delete' onClick={() => {handleDelete(pl.plant_id)}}>Delete</button>
             </div>
           </StyledPlantContainer>
