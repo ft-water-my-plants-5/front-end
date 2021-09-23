@@ -66,6 +66,10 @@ export default function PlantPage(props) {
       });
   };
 
+//   const handleChange = (e) => {
+
+//   }
+
   return (
     <StyledPlantPage>
       <h2>{`${userData.username}'s Plants!`}</h2>
@@ -123,7 +127,7 @@ export default function PlantPage(props) {
                   Edit Notes
                 </button>
               )}
-              {/* <div className="image-container"></div> */}
+              {(fieldToEdit === "notes" || fieldToEdit === "days" || fieldToEdit === "species" || fieldToEdit === "nickname") &&  <button>Submit Changes</button>}
               <img
                 src={pl.img_url ? pl.img_url : imageGenerator()}
                 alt="plant"
@@ -132,6 +136,7 @@ export default function PlantPage(props) {
                 <button
                   onClick={() => {
                     setEditing(!isEditing);
+                    setFieldToEdit("")
                   }}
                 >
                   Edit Plant
