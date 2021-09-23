@@ -15,6 +15,8 @@ background-color: rgba(169.0, 186.0, 157.0, 0.5);
 `
 const StyledPlantContainer = styled.div`
 max-width: 60%;
+border: 1px solid whitesmoke;
+padding: 4em;
 
  
  img{
@@ -71,9 +73,9 @@ export default function PlantPage(props) {
       {plants.map((pl) => {
         return (
           <StyledPlantContainer>
-            <p>{pl.nickname}</p>
+            <h3>{pl.nickname}</h3>
             <p>{pl.species}</p>
-            <p>{pl.days_between_watering}</p>
+            <p>Days Between Watering: {pl.days_between_watering}</p>
             <p>{pl.notes}</p>
             {/* <div className="image-container"></div> */}
             <img src={imageGenerator()} alt="plant"></img>
