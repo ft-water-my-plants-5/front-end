@@ -40,6 +40,8 @@ export default function PlantPage(props) {
   const [userData, setUserData] = useState({});
   const [isEditing, setEditing] = useState(false);
   const [fieldToEdit, setFieldToEdit] = useState("");
+  const [changedValue, setChangedValue] = useState('')
+  const [objectToSend, setObjectToSend] = useState({})
 
   const { plants, setPlants } = props;
 
@@ -66,9 +68,13 @@ export default function PlantPage(props) {
       });
   };
 
-//   const handleChange = (e) => {
-
-//   }
+    const handleChange = (e) => {
+        setChangedValue(
+         e.target.value
+        )
+        setObjectToSend({e.target.name: })
+        console.log(changedValue)
+    }
 
   return (
     <StyledPlantPage>
@@ -78,7 +84,7 @@ export default function PlantPage(props) {
           return (
             <StyledPlantContainer>
               {fieldToEdit === "nickname" ? (
-                <input type="text" placeholder={pl.nickname} />
+                <input type="text" placeholder={pl.nickname} name="nickname" value={changedValue} onChange={handleChange}/>
               ) : (
                 <h3>{pl.nickname}</h3>
               )}
@@ -92,7 +98,7 @@ export default function PlantPage(props) {
                 </button>
               )}
               {fieldToEdit === "species" ? (
-                <input type="text" placeholder={pl.species} />
+                <input type="text" placeholder={pl.species} name="species" value={changedValue} onChange={handleChange}/>
               ) : (
                 <p>{pl.species}</p>
               )}
@@ -105,7 +111,11 @@ export default function PlantPage(props) {
                   Edit Species
                 </button>
               )}
-              {fieldToEdit === 'days' ? <input type='number' placeholder={pl.days_between_watering}/> :<p>Days Between Watering: {pl.days_between_watering}</p>}
+              {fieldToEdit === "days" ? (
+                <input type="number" placeholder={pl.days_between_watering} name="days_between_watering" value={changedValue} onChange={handleChange}/>
+              ) : (
+                <p>Days Between Watering: {pl.days_between_watering}</p>
+              )}
               {isEditing && (
                 <button
                   onClick={() => {
@@ -116,8 +126,10 @@ export default function PlantPage(props) {
                 </button>
               )}
               {fieldToEdit === "notes" ? (
-                <input type="text" placeholder={pl.notes} />
-              ) :<p>{pl.notes}</p>}
+                <input type="text" placeholder={pl.notes} name="notes" value={changedValue} onChange={handleChange}/>
+              ) : (
+                <p>{pl.notes}</p>
+              )}
               {isEditing && (
                 <button
                   onClick={() => {
@@ -127,7 +139,10 @@ export default function PlantPage(props) {
                   Edit Notes
                 </button>
               )}
-              {(fieldToEdit === "notes" || fieldToEdit === "days" || fieldToEdit === "species" || fieldToEdit === "nickname") &&  <button>Submit Changes</button>}
+              {(fieldToEdit === "notes" ||
+                fieldToEdit === "days" ||
+                fieldToEdit === "species" ||
+                fieldToEdit === "nickname") && <button>Submit Changes</button>}
               <img
                 src={pl.img_url ? pl.img_url : imageGenerator()}
                 alt="plant"
@@ -136,7 +151,7 @@ export default function PlantPage(props) {
                 <button
                   onClick={() => {
                     setEditing(!isEditing);
-                    setFieldToEdit("")
+                    setFieldToEdit("");
                   }}
                 >
                   Edit Plant
