@@ -30,25 +30,26 @@ h2{
 
 export default function PlantPage(props) {
   const [userData, setUserData] = useState({});
-    console.log('THE PROPS', props)
+    
+  const { plants, setPlants } = props
  
   useEffect(() => {
     axiosWithAuth()
       .get("/user")
       .then((res) => {
         setUserData(res.data);
-        props.setPlants(res.data.plants);
+        setPlants(res.data.plants);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [setPlants]);
 
   return (
     <StyledPlantPage>
       <h2>{`${userData.username}'s Plants!`}</h2>
       <StyledPlantsContainer>
-      {props.plants.map((pl) => {
+      {plants.map((pl) => {
         return (
           <StyledPlantContainer>
             <p>{pl.nickname}</p>

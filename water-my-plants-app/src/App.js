@@ -38,12 +38,13 @@ function App() {
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Switch>
-        <PrivateRoute exact path="/plant-page">
-          <PlantPage plants={plants} setPlants={setPlants}/>
-        </PrivateRoute>
-        <PrivateRoute exact path="/plant-form">
-          <PlantForm plants={plants} setPlants={setPlants}/>
-        </PrivateRoute>
+        <PrivateRoute exact path="/plant-page" component={PlantPage} plants={plants} setPlants={setPlants}/>
+       
+       
+       
+        <PrivateRoute exact path="/plant-form" component={PlantForm} plants={plants} setPlants={setPlants}/>
+        
+         
         {/* <Route path="/plant-page">
           <PlantPage />
         </Route>
