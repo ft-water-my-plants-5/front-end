@@ -77,13 +77,24 @@ export default function PlantPage(props) {
         console.log(objectToSend)
     }
 
+    const handleEditSubmit = (id) => {
+        axiosWithAuth()
+        .put(`/plant/${id}`, objectToSend)
+        .then(res => {
+            console.log('IT WORKED', res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
   return (
     <StyledPlantPage>
       <h2>{`${userData.username}'s Plants!`}</h2>
       <StyledPlantsContainer>
         {plants.map((pl) => {
           return (
-            <StyledPlantContainer>
+            <StyledPlantContainer key={pl.plant_id}>
               {fieldToEdit === "nickname" ? (
                 <input type="text" placeholder={pl.nickname} name="nickname" value={changedValue} onChange={handleChange}/>
               ) : (
@@ -143,7 +154,7 @@ export default function PlantPage(props) {
               {(fieldToEdit === "notes" ||
                 fieldToEdit === "days" ||
                 fieldToEdit === "species" ||
-                fieldToEdit === "nickname") && <button>Submit Changes</button>}
+                fieldToEdit === "nickname") && <button onClick={() => {handleEditSubmit(pl.plant_id)}}>Submit Changes</button>}
               <img
                 src={pl.img_url ? pl.img_url : imageGenerator()}
                 alt="plant"
