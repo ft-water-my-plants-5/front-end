@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import imageGenerator from "../utils/imageGenerator";
+// import imageGenerator from "../utils/imageGenerator";
 import styled from 'styled-components'
 
 
