@@ -124,7 +124,7 @@ export default function PlantForm(props) {
             id="days_between_watering"
             name="days_between_watering"
             type="number"
-            value={formValues.days_between_watering}
+            value={(formValues.days_between_watering)}
             onChange={handleChange}
           />
         </label>
@@ -138,7 +138,7 @@ export default function PlantForm(props) {
             onChange={handleChange}
           />
         </label>
-        <Button> Add Your Plant </Button>
+        <Button type='submit'> Add Your Plant </Button>
       </form>
     </StyledDiv>
   );

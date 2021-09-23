@@ -8,6 +8,7 @@ import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
   const [plants, setPlants] = useState([]);
@@ -31,6 +32,7 @@ function App() {
           plants={plants}
           setPlants={setPlants}
         />
+        
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>

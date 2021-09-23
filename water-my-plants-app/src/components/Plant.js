@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import imageGenerator from "../utils/imageGenerator";
 import axiosWithAuth from "../utils/axiosWithAuth";
+
 
 const StyledPlantContainer = styled.div`
   max-width: 60%;
@@ -27,6 +28,9 @@ export default function Plant(props) {
   const [fieldToEdit, setFieldToEdit] = useState("");
   const [changedValue, setChangedValue] = useState("");
   const [objectToSend, setObjectToSend] = useState({});
+  const [photo, setPhoto] = useState('')
+
+  useEffect(() => {setPhoto(imageGenerator())}, [])
 
   const handleDelete = (plantId) => {
     axiosWithAuth()
@@ -41,7 +45,7 @@ export default function Plant(props) {
 
   const handleChange = (e) => {
     setChangedValue(e.target.value);
-    setObjectToSend({ [e.target.name]: e.target.value });
+    setObjectToSend({ [e.target.name]: (e.target.type === 'text' ? e.target.value : parseInt(e.target.value))});
     console.log(changedValue);
     console.log(objectToSend);
   };
@@ -167,7 +171,7 @@ export default function Plant(props) {
         </button>
       )}
       <img
-        src={plant.img_url ? plant.img_url : imageGenerator()}
+        src={plant.img_url ? plant.img_url : photo}
         alt="plant"
       ></img>
       <div className="button-container">
