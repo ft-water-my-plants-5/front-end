@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-// import imageGenerator from "../utils/imageGenerator";
+import imageGenerator from "../utils/imageGenerator";
 import styled from 'styled-components'
 
 
@@ -85,7 +85,7 @@ export default function PlantPage(props) {
             <p>{pl.notes}</p>
             {isEditing && <button>Edit Notes</button>}
             {/* <div className="image-container"></div> */}
-            <img src={pl.img_url} alt="plant"></img>
+            <img src={pl.img_url ? pl.img_url : imageGenerator()} alt="plant"></img>
             <div className='button-container'>
                 <button onClick={()=> {setEditing(true)}}>Edit Plant</button>
                 <button className='delete' onClick={() => {handleDelete(pl.plant_id)}}>Delete</button>
