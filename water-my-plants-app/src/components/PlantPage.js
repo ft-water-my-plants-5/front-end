@@ -5,15 +5,17 @@ import styled from 'styled-components'
 
 
 const StyledPlantsContainer = styled.div`
-width: 75%;
+width: 65%;
 margin: 0 auto;
 display: flex;
 flex-direction: column;
 align-items: center;
 text-align:center;
+background-color: rgba(169.0, 186.0, 157.0, 0.5);
 `
 const StyledPlantContainer = styled.div`
 max-width: 60%;
+
  
  img{
      height: 30vh;
@@ -29,9 +31,11 @@ const StyledPlantPage = styled.section`
 h2{
     text-align: center;
     font-size: 4rem;
+    background-color:${(props) => props.theme.colors.amazon};
+    color: whitesmoke;
 }
 `
-
+ 
 export default function PlantPage(props) {
   const [userData, setUserData] = useState({});
     
