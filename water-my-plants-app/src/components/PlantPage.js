@@ -18,6 +18,10 @@ max-width: 60%;
  img{
      height: 30vh;
  }
+
+ button.delete:hover{
+     background-color: red;
+ }
  
 `
 const StyledPlantPage = styled.section`
@@ -45,6 +49,17 @@ export default function PlantPage(props) {
       });
   }, [setPlants]);
 
+  const handleDelete = (id) => {
+      axiosWithAuth()
+      .delete(`/plants/${id}`)
+      .then(res => {
+          setPlants(plants.filter((pl) => pl.plant_id != id))
+      })
+      .catch(err => {
+          console.log(err)
+      })
+  }
+
   return (
     <StyledPlantPage>
       <h2>{`${userData.username}'s Plants!`}</h2>
@@ -58,6 +73,10 @@ export default function PlantPage(props) {
             <p>{pl.notes}</p>
             {/* <div className="image-container"></div> */}
             <img src={imageGenerator()} alt="plant"></img>
+            <div className='button-container'>
+                <button>Edit Plant</button>
+                <button className='delete' onClick={() => {handleDelete(pl.plant_id)}}>Delete</button>
+            </div>
           </StyledPlantContainer>
           
         );
