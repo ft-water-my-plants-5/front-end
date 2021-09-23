@@ -6,7 +6,6 @@ const Button = styled.button`
   background-color: ${(props) => props.theme.colors.amazon};
   font-size: 2rem;
   border-radius: 0.15em;
-  margin: 0 auto;
   text-align: center;
 `;
 
@@ -14,9 +13,8 @@ const StyledDiv = styled.div`
   font-size: 2.5rem;
   color: ${(props) => props.theme.colors.amazon};
   border: 2px solid ${(props) => props.theme.colors.amazon};
-  margin: 0 auto;
+  margin: 10% auto;
   width: 40%;
-  padding: 2em auto;
   background-color: ${(props) => props.theme.colors.laurelGreen};
   
   
@@ -35,7 +33,7 @@ const StyledDiv = styled.div`
  input, label{
      display: list-item;
      list-style-type: none;
-     margin-bottom: 1em;
+     padding: 0.5em;
  }
 
 `;
