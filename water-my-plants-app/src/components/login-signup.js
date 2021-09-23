@@ -1,17 +1,20 @@
-import "../App.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import schema, { loginSchema } from "./schema";
-import * as Yup from "yup";
+import schema, {loginSchema} from './schema';
+import * as Yup from 'yup';
+
+
 const LoginStyle = Styled.div`
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
 	align-items: center;
   padding: 5%;
-	
+	@media(max-width: 500px){
+		
+	}
 	div{
 		display: flex;
         flex-direction column;
@@ -44,23 +47,21 @@ const LoginStyle = Styled.div`
                 letter-spacing: 2px;
                 border-radius: 5px;
             }
-
 }
-
 
 `;
 //validity
 const initialDisable = true;
 const initialsignupErrors = {
-  username: "",
-  phone_number: "",
-  password: "",
-};
+	username:'',
+	phone_number:'',
+	password:'',
+}
 
 const initialloginErrors = {
-  username: "",
-  password: "",
-};
+	username:'',
+	password:'',
+}
 const initiallogin = {
   username: "",
   password: "",
@@ -82,38 +83,38 @@ export default function LoginSignup(props) {
   const [loginErrors, setLoginErrors] = useState(initialloginErrors);
 
   const validateSignup = (name, value) => {
-    Yup.reach(schema, name)
-      .validate(value)
-      .then(() => setSignupErrors({ ...signupErrors, [name]: "" }))
-      .catch((er) =>
-        setSignupErrors({ ...signupErrors, [name]: er.errors[0] })
-      );
-  };
+	Yup.reach(schema, name)
+	.validate(value)
+	.then(()=> setSignupErrors({...signupErrors, [name]:''}))
+	.catch((er)=> setSignupErrors({...signupErrors, [name]:er.errors[0]}))
+	}
 
-  const validateLogin = (name, value) => {
-    Yup.reach(loginSchema, name)
-      .validate(value)
-      .then(() => setLoginErrors({ ...loginErrors, [name]: "" }))
-      .catch((er) => setLoginErrors({ ...loginErrors, [name]: er.errors[0] }));
-  };
+	const validateLogin = (name, value) => {
+	Yup.reach(loginSchema, name)
+	.validate(value)
+	.then(()=> setLoginErrors({...loginErrors, [name]:''}))
+	.catch((er)=> setLoginErrors({...loginErrors, [name]:er.errors[0]}))
+	}
 
   const history = useHistory();
 
   const updatelogin = (inputName, inputValue) => {
-    validateLogin(inputName, inputValue);
+    validateLogin(inputName, inputValue)
     setLoginData({ ...loginData, [inputName]: inputValue });
   };
   const updatesignup = (inputName, inputValue) => {
-    validateSignup(inputName, inputValue);
+    validateSignup(inputName, inputValue)
     setSignupData({ ...signupData, [inputName]: inputValue });
   };
 
-  useEffect(() => {
-    schema.isValid(signupData).then((valid) => setsignupDisable(!valid));
-  }, [signupData]);
-  useEffect(() => {
-    loginSchema.isValid(loginData).then((valid) => setLoginDisable(!valid));
-  }, [loginData]);
+  useEffect(()=>{
+    schema.isValid(signupData)
+    .then(valid=> setsignupDisable(!valid))
+  }, [signupData])
+  useEffect(()=>{
+    loginSchema.isValid(loginData)
+    .then(valid=> setLoginDisable(!valid))
+  }, [loginData])
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
@@ -143,7 +144,7 @@ export default function LoginSignup(props) {
         signupData
       )
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+		localStorage.setItem("token", res.data.token)
         props.setIsLoggedIn(true);
         history.push("/plant-page");
       })
@@ -156,40 +157,39 @@ export default function LoginSignup(props) {
   return (
     <LoginStyle>
       {!signUpForm && (
-        <div className="login">
-          <h3>Login</h3>
-          <label>
-            {"Username "}
-            <input
-              type="text"
-              name="username"
-              value={loginData.username}
-              onChange={onChange}
-            />
-          </label>
-          <label>
-            {"Password"}
-            <input
-              type="password"
-              name="password"
-              value={loginData.password}
-              onChange={onChange}
-            />
-          </label>
 
-          {/*todo: setup validation*/}
-          {/*todo: loginbtn routes to homepage*/}
-          <button disabled={loginDisable} onClick={login}>
-            Log In
-          </button>
-          <button
+          <div className="login">
+            <h3>Login</h3>
+            <label>
+              {"Username "}
+              <input
+                type="text"
+                name="username"
+                value={loginData.username}
+                onChange={onChange}
+              />
+            </label>
+            <label>
+              {"Password"}
+              <input
+                type="password"
+                name="password"
+                value={loginData.password}
+                onChange={onChange}
+              />
+            </label>
+
+            {/*todo: setup validation*/}
+            {/*todo: loginbtn routes to homepage*/}
+            <button disabled={loginDisable} onClick={login}>Log In</button>
+			<button
             onClick={() => {
               setSignUpForm(true);
             }}
           >
             Sign Up!
           </button>
-        </div>
+          </div>
       )}
       {signUpForm && (
         <div className="signup">
@@ -221,10 +221,10 @@ export default function LoginSignup(props) {
               onChange={onChange}
             />
           </label>
-          <button disabled={signupDisable} onClick={signUp}>
-            Sign Up
-          </button>
-          <button onClick={() => setSignUpForm(false)}>Back to Login</button>
+          <button 
+		  disabled={signupDisable}
+		  onClick={signUp}>Sign Up</button>
+         <button onClick={() => setSignUpForm(false)}>Back to Login</button>
         </div>
       )}
     </LoginStyle>
