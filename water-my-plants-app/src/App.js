@@ -8,42 +8,29 @@ import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
 
-//filler state
-// const [plants, setPlants] = useState([]);
-// const [plant, setPlant] = useState();
-// const [user, setUser] = useState();
-
-// //SET DATA
-// useEffect(
-//   Axios.get("dummydata.api")
-//     .then((res) => {
-//       console.log(res.data);
-//       setData(res.data);
-//     })
-//     .catch((er) => {
-//       console.error(er);
-//     }),
-//   []
-// );
-
-//RETURN HTML
-
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
+  const [plants, setPlants] = useState([]);
+
   return (
     <div className="App">
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Switch>
-        <PrivateRoute exact path="/plant-page" component={PlantPage} />
-        <PrivateRoute exact path="/plant-form" component={PlantForm} />
-        {/* <Route path="/plant-page">
-          <PlantPage />
-        </Route>
-        <Route path="/plant-form">
-          <PlantForm />
-        </Route> */}
-
+        <PrivateRoute
+          exact
+          path="/plant-page"
+          component={PlantPage}
+          plants={plants}
+          setPlants={setPlants}
+        />
+        <PrivateRoute
+          exact
+          path="/plant-form"
+          component={PlantForm}
+          plants={plants}
+          setPlants={setPlants}
+        />
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>
