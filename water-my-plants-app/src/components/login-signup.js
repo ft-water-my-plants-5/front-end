@@ -10,6 +10,7 @@ const LoginStyle = Styled.div`
 	flex-flow: row wrap;
 	justify-content: center;
 	align-items: center;
+  padding: 5%;
 	@media(max-width: 500px){
 		
 	}
@@ -17,29 +18,33 @@ const LoginStyle = Styled.div`
 		display: flex;
         flex-direction column;
         justify-content: space-around;
-        border: ${(props) => props.theme.colors.amazon} solid 2.5px;
-        border-radius: 3px;
+        border: ${(props) => props.theme.colors.cambridgeBlue} solid 2.5px;
+        border-radius: 5px;
         box-shadow: 3px 3px 15px 1px;
         margin-top:10px;
         margin-left:10px;
         margin-right:10px;
         height: 200px;
         h3{align-self: center;}
+        color: ${(props) => props.theme.colors.amazon};
         button{
             width: 40%;
             align-self:center;
-            background-color:${(props) => props.theme.colors.greenSheen};
+            background-color:${(props) => props.theme.colors.cambridgeBlue};
+            color: ${(props) => props.theme.colors.eggshell};
+            border-radius: 5px;
         }
 		label{
             display:flex; 
             flex-flow:row no-wrap;
 	}
 	input{
-                margin-left:3px;
+                margin: 1% 0 2% 1.5%;
                 justify-content:flex-end;
-                background-color:${(props) => props.theme.colors.greenSheen};
-                color:white;
-                letter-spacing:1px;
+                background-color:${(props) => props.theme.colors.cambridgeBlue};
+                color:eggshell;
+                letter-spacing: 2px;
+                border-radius: 5px;
             }
 }
 
@@ -153,9 +158,9 @@ export default function LoginSignup(props) {
       {!signUpForm && (
 
           <div className="login">
-            <h3>login</h3>
+            <h3>Login</h3>
             <label>
-              {"username "}
+              {"Username "}
               <input
                 type="text"
                 name="username"
@@ -164,7 +169,7 @@ export default function LoginSignup(props) {
               />
             </label>
             <label>
-              {"password"}
+              {"Password"}
               <input
                 type="password"
                 name="password"
@@ -175,39 +180,39 @@ export default function LoginSignup(props) {
 
             {/*todo: setup validation*/}
             {/*todo: loginbtn routes to homepage*/}
-            <button disabled={loginDisable} onClick={login}>Log in</button>
+            <button disabled={loginDisable} onClick={login}>Log In</button>
 			<button
             onClick={() => {
               setSignUpForm(true);
             }}
           >
-            Sign up!
+            Sign Up!
           </button>
           </div>
       )}
       {signUpForm && (
         <div className="signup">
-          <h3>signup</h3>
+          <h3>Sign Up</h3>
           <label>
-            {"username "}
+            {"Username "}
             <input
               type="text"
-              name="username"
+              name="Username"
               value={signupData.username}
               onChange={onChange}
             />
           </label>
           <label>
-            {"password "}
+            {"Password "}
             <input
-              type="password"
+              type="Password"
               name="password"
               value={signupData.password}
               onChange={onChange}
             />
           </label>
           <label>
-            {"phone number "}
+            {"Telephone"}
             <input
               type="text"
               name="phone_number"
@@ -217,7 +222,7 @@ export default function LoginSignup(props) {
           </label>
           <button 
 		  disabled={signupDisable}
-		  onClick={signUp}>sign up</button>
+		  onClick={signUp}>Sign Up</button>
          <button onClick={() => setSignUpForm(false)}>Back to Login</button>
         </div>
       )}

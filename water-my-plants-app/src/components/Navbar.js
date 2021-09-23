@@ -21,6 +21,7 @@ const StyledNavLink = styled(NavLink)`
   align-items: center;
   padding: 0 0.5em;
   white-space: nowrap;
+  
 
   &.active {
     background-color: ${(props) => props.theme.colors.cambridgeBlue};
