@@ -23,10 +23,10 @@ const LoginStyle = Styled.div`
         margin-top:10px;
         margin-left:10px;
         margin-right:10px;
-        height: 120px;
+        height: 200px;
         h3{align-self: center;}
         button{
-            width:30%;
+            width: 40%;
             align-self:center;
             background-color:${(props) => props.theme.colors.greenSheen};
         }
@@ -149,7 +149,7 @@ export default function LoginSignup(props) {
   return (
     <LoginStyle>
       {!signUpForm && (
-        <>
+
           <div className="login">
             <h3>login</h3>
             <label>
@@ -174,16 +174,14 @@ export default function LoginSignup(props) {
             {/*todo: setup validation*/}
             {/*todo: loginbtn routes to homepage*/}
             <button disabled={loginDisable} onClick={login}>Log in</button>
-          </div>
-
-          <button
+			<button
             onClick={() => {
               setSignUpForm(true);
             }}
           >
-            Not registered? Sign up!
+            Sign up!
           </button>
-        </>
+          </div>
       )}
       {signUpForm && (
         <div className="signup">

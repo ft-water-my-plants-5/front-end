@@ -30,7 +30,7 @@ import PrivateRoute from "./components/PrivateRoute";
 //RETURN HTML
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
   return (
     <div className="App">
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
