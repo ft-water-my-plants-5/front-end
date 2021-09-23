@@ -12,4 +12,5 @@ const signupSchema = Yup.object().shape({
 })
 
 export default signupSchema;
+export {loginSchema};
 //otherwise {loginSchema}
