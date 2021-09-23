@@ -13,6 +13,7 @@ align-items: center;
 text-align:center;
 `
 const StyledPlantContainer = styled.div`
+max-width: 60%;
  
  img{
      height: 30vh;
