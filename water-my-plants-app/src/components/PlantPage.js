@@ -59,7 +59,7 @@ export default function PlantPage(props) {
       axiosWithAuth()
       .delete(`/plants/${id}`)
       .then(res => {
-          setPlants(plants.filter((pl) => pl.plant_id != id))
+          setPlants(plants.filter((pl) => pl.plant_id !== id))
       })
       .catch(err => {
           console.log(err)
