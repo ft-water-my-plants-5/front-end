@@ -31,13 +31,20 @@ import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
+  const [plants, setPlants] = useState([]);
+ 
   return (
     <div className="App">
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Switch>
-        <PrivateRoute exact path="/plant-page" component={PlantPage} />
-        <PrivateRoute exact path="/plant-form" component={PlantForm} />
+        <PrivateRoute exact path="/plant-page" component={PlantPage} plants={plants} setPlants={setPlants}/>
+       
+       
+       
+        <PrivateRoute exact path="/plant-form" component={PlantForm} plants={plants} setPlants={setPlants}/>
+        
+         
         {/* <Route path="/plant-page">
           <PlantPage />
         </Route>

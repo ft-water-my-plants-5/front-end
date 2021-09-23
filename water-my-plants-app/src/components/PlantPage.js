@@ -28,10 +28,11 @@ h2{
 }
 `
 
-export default function PlantPage() {
-  const [plants, setPlants] = useState([]);
+export default function PlantPage(props) {
   const [userData, setUserData] = useState({});
-
+    
+  const { plants, setPlants } = props
+ 
   useEffect(() => {
     axiosWithAuth()
       .get("/user")
@@ -42,7 +43,7 @@ export default function PlantPage() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [setPlants]);
 
   return (
     <StyledPlantPage>
