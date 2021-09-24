@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import imageGenerator from "../utils/imageGenerator";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -61,10 +61,9 @@ const StyledPlantContainer = styled.div`
 
 export default function Plant(props) {
   const { plant, plants, setPlants } = props;
-  const { history } = useHistory()
   const { id } = useParams()
   const paramPlant = plants.find(pl => parseInt(id) === pl.plant_id)
-  console.log(paramPlant)
+  
   
 
 //   const [plantToEdit, setPlantToEdit] = useState("");
@@ -80,8 +79,8 @@ export default function Plant(props) {
     axiosWithAuth()
       .delete(`/plants/${plantId}`)
       .then((res) => {
+        props.history.push('/plant-page')
         setPlants(plants.filter((pl) => pl.plant_id !== plantId));
-        paramPlant && history.push('/plant-page')
       })
       .catch((err) => {
         console.log(err);
@@ -217,7 +216,7 @@ export default function Plant(props) {
         src={plant ? (plant.img_url ? plant.img_url : photo): photo}
         alt="plant"
       ></img>
-      <div className="button-container">
+      {paramPlant && <div className="button-container">
         <button className='edit'
           onClick={() => {
             handleOpenEdit(plant ? plant.plant_id : paramPlant.plant_id);
@@ -233,7 +232,7 @@ export default function Plant(props) {
         >
           Delete
         </button>
-      </div>
+      </div>}
     </StyledPlantContainer>
   );
 }
