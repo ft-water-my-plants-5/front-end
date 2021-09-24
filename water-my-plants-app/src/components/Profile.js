@@ -8,6 +8,7 @@ const initialValues = { username: "", phone_number: "" };
 const StyledMessage = styled.div`
     margin: 1rem;
     font-weight: bold;
+    text-align:center;
 `
 
 export default function Profile() {
@@ -60,8 +61,8 @@ export default function Profile() {
           />
         </label>
         <Button type='submit'>Update Info</Button>
-        <StyledMessage>{message}</StyledMessage>
       </form>
+      <StyledMessage>{message}</StyledMessage>
     </StyledDiv>
   );
 }
