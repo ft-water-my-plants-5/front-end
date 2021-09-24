@@ -12,7 +12,7 @@ const StyledPlantContainer = styled.div`
   flex-direction: column;
   background-color: rgba(240, 234, 214, 0.5);
 
-  h3{
+  h3, p{
     color: ${(props) => props.theme.colors.amazon};
     text-shadow: 2px 2px ${(props) => props.theme.colors.eggshell}; 
   }
@@ -21,6 +21,10 @@ const StyledPlantContainer = styled.div`
     height: 30vh;
   }
 
+  button {
+      background-color: ${(props) => props.theme.colors.amazon};
+      color: ${(props) => props.theme.colors.eggshell};
+  }
   button.delete:hover {
     background-color: red;
   }
@@ -113,7 +117,7 @@ export default function Plant(props) {
           onChange={handleChange}
         />
       ) : (
-        <p>{plant.species}</p>
+        <p>Species: {plant.species}</p>
       )}
       {isEditing && (
         <button
@@ -153,7 +157,7 @@ export default function Plant(props) {
           onChange={handleChange}
         />
       ) : (
-        <p>{plant.notes}</p>
+        <p>Notes: {plant.notes}</p>
       )}
       {isEditing && (
         <button
