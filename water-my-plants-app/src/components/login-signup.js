@@ -197,7 +197,7 @@ export default function LoginSignup(props) {
             {"Username "}
             <input
               type="text"
-              name="Username"
+              name="username"
               value={signupData.username}
               onChange={onChange}
             />
