@@ -41,7 +41,7 @@ function App() {
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>
       </Switch>
-      <Footer />
+      <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
     </div>
   );
 }
