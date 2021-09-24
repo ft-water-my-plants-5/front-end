@@ -23,7 +23,7 @@ const StyledPlantContainer = styled.div`
 export default function Plant(props) {
   const { id, plant, plants, setPlants } = props;
 
-  const [plantToEdit, setPlantToEdit] = useState("");
+//   const [plantToEdit, setPlantToEdit] = useState("");
   const [isEditing, setEditing] = useState(false);
   const [fieldToEdit, setFieldToEdit] = useState("");
   const [changedValue, setChangedValue] = useState("");
@@ -69,7 +69,7 @@ export default function Plant(props) {
   };
 
   const handleOpenEdit = (plantId) => {
-    setPlantToEdit(plantId);
+    // setPlantToEdit(plantId);
     setEditing(!isEditing);
     setFieldToEdit("");
     setObjectToSend({});
@@ -78,7 +78,7 @@ export default function Plant(props) {
 
   return (
     <StyledPlantContainer>
-      {plantToEdit === plant.plant_id && fieldToEdit === "nickname" ? (
+      {fieldToEdit === "nickname" ? (
         <input
           type="text"
           placeholder={plant.nickname}
