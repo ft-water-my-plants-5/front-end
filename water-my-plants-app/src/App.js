@@ -2,7 +2,7 @@ import "./App.css";
 //import axios from "axios";
 import React, { useState } from "react";
 import LoginSignup from "./components/login-signup.js";
-import { Route, Switch, useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
