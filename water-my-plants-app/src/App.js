@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
+import Footer from "./components/Footer"
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }

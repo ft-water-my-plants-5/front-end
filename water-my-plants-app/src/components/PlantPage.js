@@ -4,11 +4,14 @@ import styled from "styled-components";
 import Plant from "./Plant";
 
 const StyledPlantPage = styled.section`
+  min-height: fit-content;
+  margin-bottom: 1rem;
   h2 {
     text-align: center;
     font-size: 4rem;
     background-color: ${(props) => props.theme.colors.amazon};
     color: whitesmoke;
+    font-style: oblique;
   }
 `;
 
@@ -41,7 +44,7 @@ export default function PlantPage(props) {
 
   return (
     <StyledPlantPage>
-      <h2>{`${userData.username}'s Plants!`}</h2>
+      <h2>{`${userData.username}'s Plants`}</h2>
       <StyledPlantsContainer>
         {plants.map((pl) => (
           <Plant
