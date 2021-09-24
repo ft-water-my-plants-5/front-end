@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import imageGenerator from "../utils/imageGenerator";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import { useParams, useHistory } from 'react-router-dom';
 
 
 
 const StyledPlantContainer = styled.div`
   width: max-content;
+  margin: 0 auto;
   border: 1px solid whitesmoke;
   padding: 4em;
   display: flex;
@@ -58,8 +60,12 @@ const StyledPlantContainer = styled.div`
 `;
 
 export default function Plant(props) {
-  const { id, plant, plants, setPlants } = props;
-
+  const { plant, plants, setPlants } = props;
+  const { history } = useHistory()
+  const { id } = useParams()
+  const paramPlant = plants.find(pl => parseInt(id) === pl.plant_id)
+  console.log(paramPlant)
+  
 
 //   const [plantToEdit, setPlantToEdit] = useState("");
   const [isEditing, setEditing] = useState(false);
@@ -75,6 +81,7 @@ export default function Plant(props) {
       .delete(`/plants/${plantId}`)
       .then((res) => {
         setPlants(plants.filter((pl) => pl.plant_id !== plantId));
+        paramPlant && history.push('/plant-page')
       })
       .catch((err) => {
         console.log(err);
@@ -112,17 +119,18 @@ export default function Plant(props) {
   };
 
   return (
+    
     <StyledPlantContainer>
       {fieldToEdit === "nickname" ? (
         <input
           type="text"
-          placeholder={plant.nickname}
+          placeholder={plant ? plant.nickname : paramPlant.nickname}
           name="nickname"
           value={changedValue}
           onChange={handleChange}
         />
       ) : (
-        <h3>{plant.nickname}</h3>
+        <h3>{plant ? plant.nickname : paramPlant.nickname}</h3>
       )}
       {isEditing && (
         <button
@@ -136,13 +144,13 @@ export default function Plant(props) {
       {fieldToEdit === "species" ? (
         <input
           type="text"
-          placeholder={plant.species}
+          placeholder={plant ? plant.species : paramPlant.species}
           name="species"
           value={changedValue}
           onChange={handleChange}
         />
       ) : (
-        <p>Species: {plant.species}</p>
+        <p>Species: {plant ? plant.species : paramPlant.species}</p>
       )}
       {isEditing && (
         <button
@@ -156,13 +164,13 @@ export default function Plant(props) {
       {fieldToEdit === "days" ? (
         <input
           type="number"
-          placeholder={plant.days_between_watering}
+          placeholder={plant? plant.days_between_watering : paramPlant.days_between_watering}
           name="days_between_watering"
           value={changedValue}
           onChange={handleChange}
         />
       ) : (
-        <p>Days Between Watering: {plant.days_between_watering}</p>
+        <p>Days Between Watering: {plant? plant.days_between_watering : paramPlant.days_between_watering}</p>
       )}
       {isEditing && (
         <button
@@ -176,13 +184,13 @@ export default function Plant(props) {
       {fieldToEdit === "notes" ? (
         <input
           type="text"
-          placeholder={plant.notes}
+          placeholder={plant ? plant.notes : paramPlant.notes}
           name="notes"
           value={changedValue}
           onChange={handleChange}
         />
       ) : (
-        <p>Notes: {plant.notes}</p>
+        <p>Notes: {plant ? plant.notes : paramPlant.notes}</p>
       )}
       {isEditing && (
         <button
@@ -199,20 +207,20 @@ export default function Plant(props) {
         fieldToEdit === "nickname") && (
         <button className='submit'
           onClick={() => {
-            handleEditSubmit(plant.plant_id);
+            handleEditSubmit(plant ? plant.plant_id : paramPlant.plant_id);
           }}
         >
           Submit Changes
         </button>
       )}
       <img
-        src={plant.img_url ? plant.img_url : photo}
+        src={plant ? (plant.img_url ? plant.img_url : photo): photo}
         alt="plant"
       ></img>
       <div className="button-container">
         <button className='edit'
           onClick={() => {
-            handleOpenEdit(plant.plant_id);
+            handleOpenEdit(plant ? plant.plant_id : paramPlant.plant_id);
           }}
         >
           Edit Plant
@@ -220,7 +228,7 @@ export default function Plant(props) {
         <button
           className="delete"
           onClick={() => {
-            handleDelete(id);
+            handleDelete(plant ? plant.plant_id : paramPlant.plant_id);
           }}
         >
           Delete
