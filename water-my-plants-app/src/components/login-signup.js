@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import schema, {loginSchema} from './schema';
 import * as Yup from 'yup';
 
-
 const LoginStyle = Styled.div`
 	display: flex;
 	flex-flow: row wrap;

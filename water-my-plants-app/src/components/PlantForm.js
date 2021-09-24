@@ -143,3 +143,5 @@ export default function PlantForm(props) {
     </StyledDiv>
   );
 }
+
+export { StyledDiv, Button }

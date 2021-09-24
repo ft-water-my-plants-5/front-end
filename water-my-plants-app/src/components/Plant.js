@@ -5,25 +5,61 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 
 const StyledPlantContainer = styled.div`
-  max-width: 60%;
+  width: max-content;
   border: 1px solid whitesmoke;
   padding: 4em;
   display: flex;
   flex-direction: column;
+  background-color: rgba(240, 234, 214, 0.5);
+
+  h3, p{
+    color: ${(props) => props.theme.colors.amazon};
+    text-shadow: 2px 2px ${(props) => props.theme.colors.eggshell}; 
+  }
+
+  h3{
+      font-size:4rem;
+  }
+
+  p{
+      font-size: 2rem;
+  }
 
   img {
     height: 30vh;
   }
 
+  button {
+      background-color: ${(props) => props.theme.colors.amazon};
+      color: ${(props) => props.theme.colors.eggshell};
+      padding: 0.4em 0;
+      border-radius: 10px;
+  }
   button.delete:hover {
     background-color: red;
+  }
+  input{
+      padding: 0.5em 0;
+      font-size: 2rem;
+  }
+
+  .edit, .delete{
+      padding: 1em;
+      margin: 1em;
+  }
+
+  .submit{
+      background-color: ${(props) => props.theme.colors.cambridgeBlue};
+      margin: 1em 0;
+      padding: 1em 0;
+      font-size: 2rem;
   }
 `;
 
 export default function Plant(props) {
   const { id, plant, plants, setPlants } = props;
 
-  const [plantToEdit, setPlantToEdit] = useState("");
+//   const [plantToEdit, setPlantToEdit] = useState("");
   const [isEditing, setEditing] = useState(false);
   const [fieldToEdit, setFieldToEdit] = useState("");
   const [changedValue, setChangedValue] = useState("");
@@ -69,7 +105,7 @@ export default function Plant(props) {
   };
 
   const handleOpenEdit = (plantId) => {
-    setPlantToEdit(plantId);
+    // setPlantToEdit(plantId);
     setEditing(!isEditing);
     setFieldToEdit("");
     setObjectToSend({});
@@ -78,7 +114,7 @@ export default function Plant(props) {
 
   return (
     <StyledPlantContainer>
-      {plantToEdit === plant.plant_id && fieldToEdit === "nickname" ? (
+      {fieldToEdit === "nickname" ? (
         <input
           type="text"
           placeholder={plant.nickname}
@@ -107,7 +143,7 @@ export default function Plant(props) {
           onChange={handleChange}
         />
       ) : (
-        <p>{plant.species}</p>
+        <p>Species: {plant.species}</p>
       )}
       {isEditing && (
         <button
@@ -147,7 +183,7 @@ export default function Plant(props) {
           onChange={handleChange}
         />
       ) : (
-        <p>{plant.notes}</p>
+        <p>Notes: {plant.notes}</p>
       )}
       {isEditing && (
         <button
@@ -162,7 +198,7 @@ export default function Plant(props) {
         fieldToEdit === "days" ||
         fieldToEdit === "species" ||
         fieldToEdit === "nickname") && (
-        <button
+        <button className='submit'
           onClick={() => {
             handleEditSubmit(plant.plant_id);
           }}
@@ -175,7 +211,7 @@ export default function Plant(props) {
         alt="plant"
       ></img>
       <div className="button-container">
-        <button
+        <button className='edit'
           onClick={() => {
             handleOpenEdit(plant.plant_id);
           }}
