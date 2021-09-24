@@ -8,6 +8,7 @@ import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer"
+import Profile from "./components/Profile"
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           plants={plants}
           setPlants={setPlants}
         />
+        <Route path='/profile'><Profile /></Route>
         
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
