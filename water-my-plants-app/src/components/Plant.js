@@ -5,11 +5,17 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 
 const StyledPlantContainer = styled.div`
-  max-width: 60%;
+  min-width: 60%;
   border: 1px solid whitesmoke;
   padding: 4em;
   display: flex;
   flex-direction: column;
+  background-color: rgba(240, 234, 214, 0.5);
+
+  h3{
+    color: ${(props) => props.theme.colors.amazon};
+    text-shadow: 2px 2px ${(props) => props.theme.colors.eggshell}; 
+  }
 
   img {
     height: 30vh;

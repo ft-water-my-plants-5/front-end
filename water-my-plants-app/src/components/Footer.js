@@ -19,6 +19,7 @@ const StyledFooter = styled.footer`
 
   h4 {
     color: ${(props) => props.theme.colors.eggshell};
+    text-shadow: 2px 2px ${(props) => props.theme.colors.amazon};
     text-align: center;
     margin-top: 4em;
     margin-bottom: 1em;
