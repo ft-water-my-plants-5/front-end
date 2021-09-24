@@ -3,6 +3,8 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from "styled-components";
 import Plant from "./Plant";
 
+
+
 const StyledPlantPage = styled.section`
   min-height: fit-content;
   margin-bottom: 1rem;

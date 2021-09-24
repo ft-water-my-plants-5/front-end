@@ -2,7 +2,7 @@ import "./App.css";
 //import axios from "axios";
 import React, { useState } from "react";
 import LoginSignup from "./components/login-signup.js";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useParams } from "react-router-dom";
 import Header from "./components/Header";
 import PlantForm from "./components/PlantForm";
 import PlantPage from "./components/PlantPage";
@@ -11,9 +11,11 @@ import Footer from "./components/Footer"
 import Profile from "./components/Profile"
 
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
   const [plants, setPlants] = useState([]);
+
 
   return (
     <div className="App">
@@ -39,7 +41,6 @@ function App() {
           path="/profile"
           component={Profile}
         />
-        
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>

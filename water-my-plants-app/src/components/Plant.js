@@ -4,6 +4,7 @@ import imageGenerator from "../utils/imageGenerator";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 
+
 const StyledPlantContainer = styled.div`
   width: max-content;
   border: 1px solid whitesmoke;
@@ -59,6 +60,7 @@ const StyledPlantContainer = styled.div`
 export default function Plant(props) {
   const { id, plant, plants, setPlants } = props;
 
+
 //   const [plantToEdit, setPlantToEdit] = useState("");
   const [isEditing, setEditing] = useState(false);
   const [fieldToEdit, setFieldToEdit] = useState("");
@@ -82,8 +84,6 @@ export default function Plant(props) {
   const handleChange = (e) => {
     setChangedValue(e.target.value);
     setObjectToSend({ [e.target.name]: (e.target.type === 'text' ? e.target.value : parseInt(e.target.value))});
-    console.log(changedValue);
-    console.log(objectToSend);
   };
 
   const handleEditSubmit = (plantId) => {
@@ -92,8 +92,7 @@ export default function Plant(props) {
       .then((res) => {
         const newPlant = res.data[0]
         const newPlants = (plants.map(pl => { return pl.plant_id === plantId ? newPlant : pl}))  
-        setPlants(newPlants)
-        console.log("IT WORKED", res);
+        setPlants(newPlants);
         setEditing(false);
         setFieldToEdit("");
         setObjectToSend({});

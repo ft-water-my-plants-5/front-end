@@ -149,7 +149,6 @@ export default function LoginSignup(props) {
       })
       .catch((err) => {
         console.log(err);
-        console.log(signupData);
       });
   };
 
