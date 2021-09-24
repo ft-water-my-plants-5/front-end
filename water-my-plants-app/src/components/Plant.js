@@ -5,7 +5,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 
 const StyledPlantContainer = styled.div`
-  min-width: 60%;
+  width: max-content;
   border: 1px solid whitesmoke;
   padding: 4em;
   display: flex;
@@ -17,6 +17,14 @@ const StyledPlantContainer = styled.div`
     text-shadow: 2px 2px ${(props) => props.theme.colors.eggshell}; 
   }
 
+  h3{
+      font-size:4rem;
+  }
+
+  p{
+      font-size: 2rem;
+  }
+
   img {
     height: 30vh;
   }
@@ -24,9 +32,27 @@ const StyledPlantContainer = styled.div`
   button {
       background-color: ${(props) => props.theme.colors.amazon};
       color: ${(props) => props.theme.colors.eggshell};
+      padding: 0.4em 0;
+      border-radius: 10px;
   }
   button.delete:hover {
     background-color: red;
+  }
+  input{
+      padding: 0.5em 0;
+      font-size: 2rem;
+  }
+
+  .edit, .delete{
+      padding: 1em;
+      margin: 1em;
+  }
+
+  .submit{
+      background-color: ${(props) => props.theme.colors.cambridgeBlue};
+      margin: 1em 0;
+      padding: 1em 0;
+      font-size: 2rem;
   }
 `;
 
@@ -172,7 +198,7 @@ export default function Plant(props) {
         fieldToEdit === "days" ||
         fieldToEdit === "species" ||
         fieldToEdit === "nickname") && (
-        <button
+        <button className='submit'
           onClick={() => {
             handleEditSubmit(plant.plant_id);
           }}
@@ -185,7 +211,7 @@ export default function Plant(props) {
         alt="plant"
       ></img>
       <div className="button-container">
-        <button
+        <button className='edit'
           onClick={() => {
             handleOpenEdit(plant.plant_id);
           }}
