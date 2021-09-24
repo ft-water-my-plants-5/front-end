@@ -34,7 +34,11 @@ function App() {
           plants={plants}
           setPlants={setPlants}
         />
-        <Route path='/profile'><Profile /></Route>
+        <PrivateRoute
+          exact
+          path="/profile"
+          component={Profile}
+        />
         
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
