@@ -9,12 +9,16 @@ import PlantPage from "./components/PlantPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer"
 import Profile from "./components/Profile"
+import Plant from "./components/Plant"
+
 
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
   const [plants, setPlants] = useState([]);
 
+  
+ 
   return (
     <div className="App">
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
@@ -34,12 +38,18 @@ function App() {
           plants={plants}
           setPlants={setPlants}
         />
+         <PrivateRoute
+          exact
+          path="/plant-page/:id"
+          component={Plant}
+          plants={plants}
+          setPlants={setPlants}
+        />
         <PrivateRoute
           exact
           path="/profile"
           component={Profile}
         />
-        
         <Route path="/login">
           <LoginSignup setIsLoggedIn={setIsLoggedIn} />
         </Route>

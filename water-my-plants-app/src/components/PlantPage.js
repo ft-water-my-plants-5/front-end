@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from "styled-components";
 import Plant from "./Plant";
+import { Link } from "react-router-dom";
 
 const StyledPlantPage = styled.section`
   min-height: fit-content;
@@ -14,7 +15,9 @@ const StyledPlantPage = styled.section`
     font-style: oblique;
   }
 `;
-
+const StyledPageLink = styled(Link)`
+  text-decoration: none;
+`;
 const StyledPlantsContainer = styled.div`
   width: 65%;
   margin: 0 auto;
@@ -47,13 +50,15 @@ export default function PlantPage(props) {
       <h2>{`${userData.username}'s Plants`}</h2>
       <StyledPlantsContainer>
         {plants.map((pl) => (
-          <Plant
-            plant={pl}
-            plants={plants}
-            setPlants={setPlants}
-            key={pl.plant_id}
-            id={pl.plant_id}
-          />
+          <StyledPageLink to={`/plant-page/${pl.plant_id}`}>
+            <Plant
+              plant={pl}
+              plants={plants}
+              setPlants={setPlants}
+              key={pl.plant_id}
+              id={pl.plant_id}
+            />
+          </StyledPageLink>
         ))}
       </StyledPlantsContainer>
     </StyledPlantPage>

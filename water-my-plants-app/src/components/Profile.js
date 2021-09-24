@@ -20,8 +20,6 @@ export default function Profile() {
       ...formValues,
       [e.target.name]: e.target.value,
     });
-
-    console.log(formValues);
   };
 
   const handleSubmit = (e) => {
@@ -33,7 +31,6 @@ export default function Profile() {
         setMessage("Account Updated Successfully!")
     })
     .catch(err => {
-        console.log(err.message)
         setMessage(`Sorry, there was an error updating your account: ${err.message}`)
     })
   }

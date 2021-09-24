@@ -89,7 +89,6 @@ export default function PlantForm(props) {
         history.push('/plant-page')
     })
     .catch(err => {
-        console.log(newPlant)
         console.log(err)
     })
 
